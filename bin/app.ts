@@ -1,6 +1,12 @@
 #!/usr/bin/env node
-import * as cdk from 'aws-cdk-lib';
+import { App, DefaultStackSynthesizer, StackProps } from 'aws-cdk-lib';
 import { AppStack } from '../lib/app-stack';
 
-const app = new cdk.App();
-new AppStack(app, 'AppStack');
+const app = new App();
+const props: StackProps = {
+  synthesizer: new DefaultStackSynthesizer({
+    generateBootstrapVersionRule: false,
+  }),
+};
+
+new AppStack(app, 'AppStack', props);
