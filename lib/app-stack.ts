@@ -4,15 +4,15 @@ import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import { Construct } from 'constructs';
 
-export class CommonRoleStack extends Stack {
+export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, 'Test001Queue', {
+    const queue = new sqs.Queue(this, 'AppQueue', {
       visibilityTimeout: Duration.seconds(300)
     });
 
-    const topic = new sns.Topic(this, 'Test001Topic');
+    const topic = new sns.Topic(this, 'AppTopic');
 
     topic.addSubscription(new subs.SqsSubscription(queue));
   }
